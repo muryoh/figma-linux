@@ -57,18 +57,6 @@
     "target": [
       {
         "target": "deb"
-      },
-      {
-        "target": "zip"
-      },
-      {
-        "target": "rpm"
-      },
-      {
-        "target": "pacman"
-      },
-      {
-        "target": "appimage"
       }
     ]
   }

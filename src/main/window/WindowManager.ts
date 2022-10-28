@@ -2,6 +2,7 @@ import installExtension, { REACT_DEVELOPER_TOOLS } from "electron-devtools-insta
 import * as E from "electron";
 import * as url from "url";
 import * as util from "util";
+import fetch from "node-fetch";
 
 import Tabs from "./Tabs";
 import Fonts from "../Fonts";
@@ -552,23 +553,48 @@ class WindowManager {
         E.clipboard.writeBuffer(format, buffer);
       }
     });
-    E.ipcMain.handle("get-fonts", async () => {
-      let dirs = storage.get().app.fontDirs;
+    E.ipcMain.handle("get-fonts", () => {
+      return fetch("http://127.0.0.1:18412/figma/font-files?freetype_minimum_api_version=20", {
+        headers: {
+          Origin: "https://www.figma.com",
+        },
+      })
+        .then(async it => {
+          if (!it.ok) throw new Error(`ERROR: ${it.status} ${await it.text()}`);
+          return it.json();
+        })
+        .then(it => it.fontFiles)
+        .catch(e => {
+          console.warn(e);
+          let dirs = storage.get().app.fontDirs;
 
-      if (!dirs) {
-        dirs = Const.DEFAULT_SETTINGS.app.fontDirs;
-      }
+          if (!dirs) {
+            dirs = Const.DEFAULT_SETTINGS.app.fontDirs;
+          }
 
-      return Fonts.getFonts(dirs);
+          return Fonts.getFonts(dirs);
+        });
     });
     E.ipcMain.handle("get-font-file", async (event, data) => {
-      const file = await Fonts.getFontFile(data.path);
+      return fetch(`http://127.0.0.1:18412/figma/font-file?file=${data.path}&freetype_minimum_api_version=20`, {
+        headers: {
+          Origin: "https://www.figma.com",
+        },
+      })
+        .then(async it => {
+          if (!it.ok) throw new Error(`ERROR: ${it.status} ${await it.text()}`);
+          return it.buffer();
+        })
+        .catch(async e => {
+          console.warn(e);
+          const file = await Fonts.getFontFile(data.path);
 
-      if (file && file.byteLength > 0) {
-        return file;
-      }
+          if (file && file.byteLength > 0) {
+            return file;
+          }
 
-      return null;
+          return null;
+        });
     });
 
     E.app.on("handlePluginMenuAction", pluginMenuAction => {
