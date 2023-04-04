@@ -16,7 +16,7 @@ export default class Tabs {
         nodeIntegration: false,
         webgl: true,
         contextIsolation: false,
-        worldSafeExecuteJavaScript: true,
+        // worldSafeExecuteJavaScript: true,
         zoomFactor: 1,
       },
     };

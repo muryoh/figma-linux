@@ -1,4 +1,5 @@
 import * as E from "electron";
+const remote = process.type === "browser" ? E : require("@electron/remote");
 import * as React from "react";
 import { observer, inject } from "mobx-react";
 import { toJS } from "mobx";
@@ -117,7 +118,7 @@ class Tabs extends React.Component<TabsProps, unknown> {
         click: (): void => {
           const tab: Tab | undefined = this.props.tabs.getTab(id);
 
-          tab && E.remote.shell.openExternal(`${Const.HOMEPAGE}/file/${tab.fileKey}`);
+          tab && remote.shell.openExternal(`${Const.HOMEPAGE}/file/${tab.fileKey}`);
         },
       },
       { type: "separator" },
@@ -131,10 +132,10 @@ class Tabs extends React.Component<TabsProps, unknown> {
       },
     ];
 
-    const menu = E.remote.Menu.buildFromTemplate(context);
+    const menu = remote.Menu.buildFromTemplate(context);
 
     menu.popup({
-      window: E.remote.getCurrentWindow(),
+      window: remote.getCurrentWindow(),
     });
   };
 
@@ -164,7 +165,7 @@ class Tabs extends React.Component<TabsProps, unknown> {
     e.stopPropagation();
     e.stopImmediatePropagation();
 
-    const w = E.remote.getCurrentWindow();
+    const w = remote.getCurrentWindow();
     const windowBounds = w.getBounds();
 
     w.setBounds({

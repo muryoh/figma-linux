@@ -1,4 +1,5 @@
 import * as E from "electron";
+const remote = process.type === "browser" ? E : require("@electron/remote");
 import * as React from "react";
 import { observer, inject } from "mobx-react";
 import { toJS } from "mobx";
@@ -78,10 +79,10 @@ class ThemeCreator extends React.Component<CreatorProps, unknown> {
           },
         ];
 
-        const menu = E.remote.Menu.buildFromTemplate(context);
+        const menu = remote.Menu.buildFromTemplate(context);
 
         menu.popup({
-          window: E.remote.getCurrentWindow(),
+          window: remote.getCurrentWindow(),
         });
       }
     }

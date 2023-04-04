@@ -52,6 +52,7 @@
     "uuid": "^8.3.2"
   },
   "devDependencies": {
+    "@electron/remote": "^2.0.9",
     "@types/adm-zip": "^0.4.33",
     "@types/electron-devtools-installer": "^2.0.3",
     "@types/lodash": "^4.14.166",
@@ -69,7 +70,7 @@
     "clean-webpack-plugin": "^3.0.0",
     "copy-webpack-plugin": "^6.1.0",
     "css-loader": "^4.3.0",
-    "electron": "^13.6.9",
+    "electron": "^18",
     "electron-builder": "^22.10.4",
     "electron-rebuild": "^2.3.4",
     "electron-webpack": "^2.8.2",

@@ -1,4 +1,5 @@
 import * as E from "electron";
+const remote = process.type === "browser" ? E : require("@electron/remote");
 
 import { INITACTIONINITSTATE, ACTIONTABSTATE, ACTIONFILEBROWSERSTATE } from "Const";
 
@@ -11,7 +12,7 @@ class MenuState {
   public static pluginMenuData: Menu.MenuItem[] = [];
 
   private static update = (state: MenuState.MenuStateParams) => {
-    const app = E.remote ? E.remote.app : E.app;
+    const app = remote ? remote.app : E.app;
 
     if (state.actionState) {
       MenuState.actionState = {

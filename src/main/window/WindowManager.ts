@@ -83,7 +83,6 @@ class WindowManager {
         webSecurity: false,
         webgl: true,
         experimentalFeatures: true,
-        enableRemoteModule: true,
         contextIsolation: false,
       },
     };
@@ -823,7 +822,6 @@ class WindowManager {
         nodeIntegration: true,
         contextIsolation: false,
         experimentalFeatures: false,
-        enableRemoteModule: true,
       },
     });
 
@@ -861,7 +859,6 @@ class WindowManager {
         nodeIntegration: true,
         contextIsolation: false,
         experimentalFeatures: false,
-        enableRemoteModule: true,
       },
     });
 
