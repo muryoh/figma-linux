@@ -56,7 +56,10 @@
     ],
     "target": [
       {
-        "target": "deb"
+        "target": "pacman",
+        "arch": [
+          "arm64"
+        ]
       }
     ]
   }
