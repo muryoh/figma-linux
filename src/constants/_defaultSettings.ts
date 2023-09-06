@@ -12,7 +12,7 @@ export const DEFAULT_SETTINGS: SettingsInterface = {
     useZenity: false,
     disableThemes: false,
     panelHeight: 40,
-    saveLastOpenedTabs: true,
+    saveLastOpenedTabs: false,
     exportDir: `${process.env.HOME}/Pictures/Figma`,
     fontDirs: [
       "/usr/share/fonts",

@@ -150,24 +150,24 @@ class WindowManager {
   };
 
   private restoreTabs = () => {
-    const tabs = storage.get().app.lastOpenedTabs;
+    // const tabs = storage.get().app.lastOpenedTabs;
 
-    if (Array.isArray(tabs) && tabs.length) {
-      tabs.forEach((tab, i) => {
-        setTimeout(() => {
-          this.addTab("loadContent.js", tab.url, tab.title);
-          if (i === tabs.length - 1) {
-            this.tabsWereRestored = true;
-          }
-        }, 500 * i);
-      });
+    // if (Array.isArray(tabs) && tabs.length) {
+    //   tabs.forEach((tab, i) => {
+    //     setTimeout(() => {
+    //       this.addTab("loadContent.js", tab.url, tab.title);
+    //       if (i === tabs.length - 1) {
+    //         this.tabsWereRestored = true;
+    //       }
+    //     }, 500 * i);
+    //   });
 
-      storage.clearLastOpenedTabs();
+    //   storage.clearLastOpenedTabs();
 
-      MenuState.updateInFileBrowserActionState();
-    } else {
-      this.tabsWereRestored = true;
-    }
+    //   MenuState.updateInFileBrowserActionState();
+    // } else {
+    this.tabsWereRestored = true;
+    // }
   };
 
   private initMenu = (template?: E.MenuItemConstructorOptions[]) => {
